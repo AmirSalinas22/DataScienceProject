@@ -4,7 +4,7 @@ import pandas as pd
 
 
 # Data
-# Growth between 1960 to ~2019
+# Growth between 1960 to ~2018
 countryLandTot = pd.read_csv("API_AG.LND.TOTL.K2_DS2_en_csv_v2_511817.csv")
 countryPopTot = pd.read_csv("API_SP.POP.TOTL_DS2_en_csv_v2_511378.csv")
 # Countries GDP USD
@@ -15,9 +15,8 @@ countryMilExp = pd.read_csv("API_MS.MIL.XPND.GD.ZS_DS2_en_csv_v2_511529.csv")
 # Current
 ######################
 
-
 dataPop = countryPopTot.loc[countryPopTot['Country Name'] == 'United States']
-dataYear = dataPop.iloc[0]['2008']
+dataYear = dataPop.iloc[0]['2018']
 print(dataPop)
 print(dataYear)
 
