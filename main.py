@@ -1,32 +1,62 @@
+import stat
+import math
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
 
+def PlotCountry(country, color, num):
+    ##### DATA EXTRACTION/MINIPULATION #####
+    countryPlot = plt
+    plotTitle = country.iloc[0][0]
+    country = country.iloc[:, 2:60]
+    country = np.array(country).flatten()
+    country = np.reshape(country, 58)
+    years = range(1960, 2019)
+    countryGDP_TL = pd.DataFrame(list(zip(years, country)))
+    countryGDP_TL.columns = ['Year', 'Value']
+    # print(countryGDP_TL.shape)
+    # print(countryGDP_TL)
+
+    ##### PLOT #####
+    countryPlot.figure(num) # COMMENT OUT IF YOU WANT TO SHOW MULTIPLE COUNTRIES IN A SINGLE FIGURE
+    countryPlot.plot(countryGDP_TL['Year'], countryGDP_TL['Value'], color= color, label = plotTitle)
+    # countryPlot.legend(plotTitle) # DOESNT WORK FOR IF YOU HAVE MULTIPLE FIGURE IN ONE
+    countryPlot.title(plotTitle + ' GDP')
+    countryPlot.xlabel("Year")
+    countryPlot.xlim(1960, 2019)
+    countryPlot.ylabel("GDP (US$)")
+    return countryPlot
+
+
+##################### START #####################
+
+
+    ###### DATA/DATASETS ######
 militaryExpenditure_TL = pd.read_csv("Military_Expenditure_1960-2019.csv")
 population_TL = pd.read_csv("Population_1960-2019.csv")
 gdp_TL = pd.read_csv("GDP_1960-2019.csv")
 
-print(gdp_TL)
+    ########## COUNTRIES GDP ##########
 
+    ###### USA GDP GROWTH ######
+usaGDP_TL = gdp_TL.loc[gdp_TL['Country Name'] == 'United States']
+PlotCountry(usaGDP_TL, 'blue', 1)
 
+    ###### CHINA GDP GROWTH ######
+chinaGDP_TL = gdp_TL.loc[gdp_TL['Country Name'] == 'China']
+PlotCountry(chinaGDP_TL, 'red', 2)
 
+    ###### RUSSIAN GDP GROWTH ######
+russiaGDP_TL = gdp_TL.loc[gdp_TL['Country Name'] == 'Russian Federation']
+PlotCountry(russiaGDP_TL, 'black', 3)
 
+    ###### INDIA GDP GROWTH ######
+indiaGDP_TL = gdp_TL.loc[gdp_TL['Country Name'] == 'India']
+PlotCountry(indiaGDP_TL, 'orange', 4)
 
+    ###### GERMANY GDP GROWTH ######
+germanyGDP_TL = gdp_TL.loc[gdp_TL['Country Name'] == 'Germany']
+PlotCountry(germanyGDP_TL, 'yellow', 5)
 
-
-####################################################################################################
-#  OLD Data
-
-# Gets...cell (Row x Column)
-#dataPop = countryPopTot.loc[countryPopTot['Country Name'] == 'United States']
-# Row's Column (cell)
-#dataYear = dataPop.iloc[0]['2018']
-#print(dataPop) # Row data
-#print(dataYear) # cell
-# Ukraine(246), United States(249), Russia(200), China(38), India(107)
-# Print
-#print(countryLandTot.iloc[246])
-#print(countryPopTot.iloc[38])
-#print(countryMilExp.iloc[249])
-
-################################################################################################################
+plt.show()
