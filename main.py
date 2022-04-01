@@ -37,7 +37,7 @@ gdp_TL = pd.read_csv("GDP_1960-2019.csv")
 
 ### NOTE* BETTER VARIABLE DISTRUBUTION E.g. Country Object ({data, color, Name,})
 
-    ####### GLOBAL VALUES ######## (might change)
+    ####### GLOBAL VALUES ######## (might change this)
 gdp_Color = 'red'
 militaryExpediture_Color = 'black'
 
